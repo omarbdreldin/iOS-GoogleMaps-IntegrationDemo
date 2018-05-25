@@ -11,6 +11,7 @@ import UIKit
 //import SDWebImage
 import Kingfisher
 import GoogleMaps
+import WebKit
 
 class DetailViewController: UIViewController {
     
@@ -22,13 +23,14 @@ class DetailViewController: UIViewController {
     var marker: GMSMarker?
     
     override func viewDidLoad() {
-        view.setNeedsDisplay()
         
-        staticMapImage.image = UIImage(named: "dummy.png")
+        let url = URL(string: imageUrl!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         
+//        staticMapImage.image = UIImage(named: "dummy.png")
         staticMapImage.kf.indicatorType = .activity
-        staticMapImage.kf.setImage(with: URL(string: imageUrl!))
+        staticMapImage.kf.setImage(with: url)
 //        staticMapImage.sd_setImage(with: URL(string: imageUrl!), completed: nil)
+        
         infoTextView.text = "\(marker!.title!)\n\(marker!.snippet!)\nDistance: \(distance!)"
     }
 }
